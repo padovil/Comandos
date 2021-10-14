@@ -1,0 +1,28 @@
+MANEJO GIT
+
+1. crear repositorio en github
+2. crear carpeta local
+3. clonar repositorio en carpeta local
+
+git clone https://github.com/padovil/Reto2.git
+
+5. entrar en carpeta clonada en el git con cd nombre
+4. pegar cosas en carpeta local clonada
+
+5. dar un status
+
+git status
+
+6. agregar git a carpeta local  
+git add .
+
+7. guardar
+git commit -m "agregamos reto 2"
+
+8. enviar cambios
+git push
+
+
+9.  agregar propietario
+git config --global user.email "aaldanap@ucentral.edu.co"
+

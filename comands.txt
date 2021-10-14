@@ -1,0 +1,127 @@
+------------------------------------------------MAQUINA 01 LINUX 8
+-->conectarse a la maquina virtual
+ssh -i ssh-key-2021-10-12.key opc@129.151.111.29
+
+-->instalar apache
+sudo yum install -y httpd
+sudo systemctl enable httpd
+sudo systemctl restart httpd
+
+-->permitir peticiones http
+sudo firewall-cmd  --add-service=http --permanent
+sudo firewall-cmd  --reload
+
+-->instalar git
+sudo yum install git
+
+
+cd /var/www/html/
+sudo git clone  https://github.com/programacionlmor/formacion_ciclo3.git
+
+
+ls listar archivos
+sudo mkdir nombre
+
+-> Pruebas: http://129.151.111.29/Reto1/formacion_ciclo3/index.html
+
+----------------------------------------------------MAQUINA 02 CENTOS 8
+(intalar java antes de maven)
+
+ssh -i ssh-key-2021-10-12.key opc@129.151.125.178
+
+-->actualiza elementos del SO
+1. sudo yum -y update                               
+
+--> instalar git
+2. sudo yum install -y git
+3. sudo git --version
+
+-->intalar JDK java
+4.  sudo yum -y install  java-11-openjdk java-11-openjdk-devel
+5. java -version
+
+mvn --version
+
+
+-->instalar maven
+6. sudo yum install -y maven
+
+7. sudo alternatives --config java actualizar version java
+8 sudo alternatives --config javac  actualizar version compilador
+
+-->instalar db mysql
+9. sudo yum install -y mysql-server
+
+-->iniciar servicio db
+10. sudo systemctl start mysqld.service
+
+-->verificar si todo ok en db 
+11. sudo systemctl status mysqld
+
+-->iniciar automaticamente db
+12. sudo systemctl enable mysqld
+
+-->reinicar server mysql
+13. sudo systemctl restart mysqld.service
+
+
+seguridad db
+14. sudo mysql_secure_installation
+
+
+-->Preguntas
+1. yes
+2. 1 - medio
+3. yes
+4. yes
+5. no
+6. no
+7. yes
+
+
+--> instalar servidor de app
+
+sudo yum install -y httpd
+sudo systemctl enable httpd
+sudo systemctl restart httpd
+
+permitir peticiones http
+sudo firewall-cmd  --add-service=http --permanent
+sudo firewall-cmd  --reload
+
+Deterner firewa
+sudo systemctl stop firewalld
+
+-> Pruebas: http://129.151.125.178
+
+-------------------------------------------------COMPILAR PORYECTO EN LA MAQUINA
+
+1. Concectarse a la maquina
+2. clonar repositorio en la maquina 
+sudo git clone https://github.com/padovil/proyectoclase1310.git
+
+3. COMPILAR PROYECTO estar ubicados en el path de pom
+sudo mvn clean package -DskipTests
+
+------------------Si sale error
+sudo nano pom.xml
+____
+<!--
+<properties>
+<java.version>11</java.version>
+</properties>
+-->
+http://www.dark-hamster.com/application/how-to-solve-error-message-failed-to-execute-goal-org-apache-maven-plugins-maven-compiler-plugin-3-8-1-compile-default-compile-on-project-fatal-error-compiling-invalid-target-release/
+
+-------------------------una vez compila genera una carpeta target, entrar a carpeta target debe haber un .jar
+4. para darle run ejecutar
+sudo java -jar   proyectoclase1310-0.0.1-SNAPSHOT.jar
+
+ir a la nube, ir a configuraciones de la subnet y agregar una regla para el puerto 8080
+
+-->Pruebas http://129.151.125.178:8080
+
+
+para escoger un porfile especifico 
+sudo java -jar -Dspring.profiles.active=prod archivo.jar
+
